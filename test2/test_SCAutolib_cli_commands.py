@@ -93,7 +93,7 @@ def test_command_setap_ca(mock_init,
     conf_file = join(dirname(abspath(__file__)), "files",
                         "dummy_config_file.json")
     args = ["-c", conf_file]
-    # args.append("-f")
+    args.append("-f")
     args.append("setup-ca")
     args.extend(["-t", ca_type])
     result = runner.invoke(cli, args)
@@ -102,4 +102,4 @@ def test_command_setap_ca(mock_init,
 
     assert result.exit_code == ReturnCode.SUCCESS.value
     mock_init.assert_called_once_with(conf_file)
-    mock_setup_local_ca.assert_called_once_with(force=False)
+    mock_setup_local_ca.assert_called_once_with(force=ca_type== "local")
